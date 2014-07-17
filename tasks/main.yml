@@ -1,0 +1,9 @@
+- name: generate monitrc file
+  sudo: true
+  template: >
+    src=monitrc.j2
+    dest=/etc/monit/conf.d/{{deploy_application_name}}
+    owner=root
+    group=root
+    mode=0644
+  notify: reload monit
