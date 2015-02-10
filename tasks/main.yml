@@ -5,5 +5,14 @@
     dest=/etc/monit/conf.d/{{deploy_application_name}}
     owner=root
     group=root
-    mode=0644
+    mode=0600
   notify: reload monit
+
+- name: generate upstart script
+  sudo: true
+  template: >
+    src=upstart-monitor.conf.j2
+    dest=/etc/init/{{ deploy_application_name }}-monitor.conf
+    owner=root
+    group=root
+    mode=0644

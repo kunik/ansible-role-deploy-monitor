@@ -1,0 +1,14 @@
+start on started {{ deploy_application_name }}
+stop on stopping {{ deploy_application_name }}
+
+pre-start script
+  {% for val in deploy_monitor.param_values %}
+  monit monitor {{ deploy_application_name }}-worker-{{ val }}
+  {% endfor %}
+end script
+
+post-stop script
+  {% for val in deploy_monitor.param_values %}
+  monit unmonitor {{ deploy_application_name }}-worker-{{ val }}
+  {% endfor %}
+end script
