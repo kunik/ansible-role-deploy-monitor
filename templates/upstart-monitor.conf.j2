@@ -1,4 +1,4 @@
-start on started {{ deploy_application_name }}
+start on {{ deploy_application_name }}-workers-started
 stop on stopping {{ deploy_application_name }}
 
 pre-start script
