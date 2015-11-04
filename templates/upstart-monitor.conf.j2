@@ -2,6 +2,7 @@ start on {{ deploy_application_name }}-workers-started
 stop on stopping {{ deploy_application_name }}
 
 pre-start script
+  monit reload
   {% for val in deploy_monitor.param_values %}
   monit monitor {{ deploy_application_name }}-worker-{{ val }}
   {% endfor %}
